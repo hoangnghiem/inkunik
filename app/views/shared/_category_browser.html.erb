@@ -1,0 +1,21 @@
+<% 
+  parent_category = Category.find(params[:parent_category_id]) 
+  select_cat = !params[:category_id].blank? && params[:sub_category_id].blank?
+  select_sub = !params[:sub_category_id].blank?
+%>
+<ul class="nav clearfix">
+  <% parent_category.sub_categories.each do |cat| %>
+    <li<%= select_cat && params[:category_id] == cat.to_param ? " class='selected'" : '' %>>
+      <%= link_to cat.name, list_products_path(parent_category, cat) %>
+      <% if cat.sub_categories.size > 0 %>
+      <ul class="level2 clearfix">
+        <% cat.sub_categories.each do |sub| %>
+          <li<%= select_sub && params[:sub_category_id] == sub.to_param ? " class='selected'" : '' %>>
+            <%= link_to sub.name, list_products_path(parent_category, cat, sub) %>
+          </li>
+        <% end %>
+      </ul>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,29 @@
+<ul>
+<% if admin_signed_in? %>
+  <li><%= link_to "Home", admin_root_path %></li>
+  <li><%= link_to "Catalog", admin_root_path %>
+    <ul>
+      <li><%= link_to "Category", admin_categories_path %></li>
+      <li><%= link_to "Product", admin_products_path %></li>
+    </ul>
+  </li>
+  <li><%= link_to "Users", "#" %>
+    <ul>
+      <% if can? :read, Admin %>
+        <li><%= link_to "Admin User", admin_admins_path %></li>
+      <% end %>
+      <% if can? :read, Role %>
+        <li><%= link_to "Role", admin_roles_path %></li>
+      <% end %>
+      <li><%= link_to "Website User", admin_roles_path %></li>
+    </ul>
+  </li>
+  <li><%= link_to "CMS", admin_root_path %></li>
+  <li><%= link_to "Order", admin_root_path %></li>
+  <li><%= link_to "Report", admin_root_path %></li>
+  <li><%= link_to "Promotion", admin_root_path %></li>
+  <li><%= link_to "System Tools", admin_root_path %></li>
+  <li><%= link_to "Gift Certificate", admin_root_path %></li>
+<% end %>
+</ul>
+

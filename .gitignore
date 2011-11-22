@@ -1,0 +1,9 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+public/stylesheets/admin.css
+public/stylesheets/screen.css
+public/stylesheets/site.css
+dsg/**
+public/assets/upload_photos/**

@@ -1,0 +1,61 @@
+<div id="cart-page">
+  <h1><%= t('cart.name') %></h1>
+  <table id="cart">
+    <tr>
+      <th><%= t('cart.design') %></th>
+      <th><%= t('cart.quantity') %></th>
+      <th><%= t('cart.total') %></th>
+    </tr>
+    <tr>
+      <td class="design">
+        <div class="ds-wrap">
+          <div class="ds-img">
+            <%= image_tag('tshirts/male/thumb/White.png') %><br/>
+            <%= link_to t('cart.view_large_image'), "#" %>
+          </div>
+          <div class="ds-info">
+            <p class="bold">[Ten thiet ke]</p>
+            <p>Loai vai: [loai vai] <%= link_to t('cart.view_large_image'), "" %></p>
+            <p>Loai ao: [loai ao]</p>
+            <p>3 mau</p>
+            <%= link_to "Chinh sua", "", :class => "button green small bigrounded" %>
+            <%= link_to "Xoa", "", :class => "button red small bigrounded" %>
+          </div>
+        </div>
+      </td>
+      <td class="quantity">
+        <table class="tbl-qty">
+          <tr>
+            <td class="size-name">S:</td>
+            <td>10</td>
+            <td class="size-name">M:</td>
+            <td>10</td>
+            <td class="size-name">L:</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td class="size-name">XL:</td>
+            <td>10</td>
+            <td class="size-name">XXL:</td>
+            <td>10</td>
+            <td class="size-name">3XL:</td>
+            <td>10</td>
+          </tr>
+        </table>
+        <%= link_to "Cap nhat", "", :class => "button green small bigrounded" %>
+      </td>
+      <td class="total">
+        <%= format_money(6000000, current_site) %>
+      </td>
+    </tr>
+    <tr class="cart-total">
+      <td colspan="3">
+        Tong tien: <%= format_money(6000000, current_site) %>
+      </td>
+    </tr>
+  </table>
+  <div class="cart-buttons">
+    <%= link_to "Tiep tuc mua hang", "", :class => "left button green medium" %>
+    <%= link_to "Thuc hien thanh toan", "", :class => "right button orange medium" %>
+  </div>
+</div>

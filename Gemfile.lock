@@ -1,0 +1,171 @@
+GIT
+  remote: git://github.com/rfc2822/recaptcha.git
+  revision: 59e78ce28588fdb3b7a7fdb4c49c2eb459459e8a
+  branch: rails3
+  specs:
+    recaptcha (0.2.3)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionmailer (3.0.3)
+      actionpack (= 3.0.3)
+      mail (~> 2.2.9)
+    actionpack (3.0.3)
+      activemodel (= 3.0.3)
+      activesupport (= 3.0.3)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.13)
+      rack-test (~> 0.5.6)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.3)
+      activesupport (= 3.0.3)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activerecord (3.0.3)
+      activemodel (= 3.0.3)
+      activesupport (= 3.0.3)
+      arel (~> 2.0.2)
+      tzinfo (~> 0.3.23)
+    activerecord-import (0.2.3)
+      activerecord (~> 3.0.0)
+    activeresource (3.0.3)
+      activemodel (= 3.0.3)
+      activesupport (= 3.0.3)
+    activesupport (3.0.3)
+    acts_as_list (0.1.2)
+    archive-tar-minitar (0.5.2)
+    arel (2.0.4)
+    bcrypt-ruby (2.1.2)
+    builder (2.1.2)
+    bullet (2.0.1)
+      uniform_notifier (~> 1.0.0)
+    cancan (1.4.1)
+    capistrano (2.5.19)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.0.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
+    columnize (0.3.2)
+    compass (0.10.6)
+      haml (>= 3.0.4)
+    daemons (1.0.10)
+    devise (1.1.3)
+      bcrypt-ruby (~> 2.1.2)
+      warden (~> 0.10.7)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    fancy-buttons (1.0.4)
+      compass (>= 0.10.6)
+    gem_plugin (0.2.3)
+    google-spreadsheet-ruby (0.1.2)
+      nokogiri (>= 1.4.3.1)
+      oauth (>= 0.3.6)
+    haml (3.0.24)
+    highline (1.6.1)
+    hirb (0.3.5)
+    i18n (0.4.2)
+    linecache19 (0.5.11)
+      ruby_core_source (>= 0.1.4)
+    mail (2.2.10)
+      activesupport (>= 2.3.6)
+      i18n (~> 0.4.1)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    markaby (0.7.1)
+      builder (>= 2.0.0)
+    mime-types (1.16)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
+    mysql2 (0.2.6)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.0.23)
+    net-ssh-gateway (1.0.1)
+      net-ssh (>= 1.99.1)
+    nokogiri (1.4.4)
+    oauth (0.4.4)
+    paperclip (2.3.6)
+      activerecord
+      activesupport
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-mount (0.6.13)
+      rack (>= 1.0.0)
+    rack-test (0.5.6)
+      rack (>= 1.0)
+    rails (3.0.3)
+      actionmailer (= 3.0.3)
+      actionpack (= 3.0.3)
+      activerecord (= 3.0.3)
+      activeresource (= 3.0.3)
+      activesupport (= 3.0.3)
+      bundler (~> 1.0)
+      railties (= 3.0.3)
+    railties (3.0.3)
+      actionpack (= 3.0.3)
+      activesupport (= 3.0.3)
+      rake (>= 0.8.7)
+      thor (~> 0.14.4)
+    rake (0.8.7)
+    rmagick (2.13.1)
+    ruby-debug-base19 (0.11.24)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.4)
+      archive-tar-minitar (>= 0.5.2)
+    sqlite3-ruby (1.3.2)
+    stringex (1.2.0)
+    thor (0.14.4)
+    treetop (1.4.9)
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.23)
+    uniform_notifier (1.0.0)
+    warden (0.10.7)
+      rack (>= 1.0.0)
+    will_paginate (3.0.pre2)
+    wirble (0.1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activerecord-import
+  acts_as_list
+  bullet
+  cancan
+  capistrano
+  capistrano-ext
+  compass (>= 0.10.6)
+  devise
+  fancy-buttons
+  google-spreadsheet-ruby
+  hirb
+  markaby
+  mongrel (= 1.2.0.pre2)
+  mysql2
+  paperclip
+  rails (= 3.0.3)
+  recaptcha!
+  rmagick
+  ruby-debug19
+  sqlite3-ruby
+  stringex
+  warden
+  will_paginate (~> 3.0.pre2)
+  wirble

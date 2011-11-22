@@ -1,0 +1,113 @@
+<div id="quick-price-wrap">
+<h3><%= t('site.quick_price') %></h3>
+<% form_tag quick_price_path, :id => "frm_quick_price", :class => '' do %>
+  <div id="errors"></div>
+  <%= hidden_field_tag "product_id", quote.product_id %>
+  <%= hidden_field_tag "variant_id", quote.product.default_variant.id %>
+  <p>San pham: <strong><%= quote.product.name %></strong></p>
+  <p>
+    <span>Chon loai vai:</span> <strong id="quick-fabric-name"><%= t("fabric.#{quote.product.default_variant.fabric}") %></strong>
+    <ul id="quick-fabric-swatches" class="kwicks horizontal">
+      <% quote.product.product_variants.each_with_index do |variant, index| %>
+        <li id="<%= variant.fabric %>" style="width:72px; height: 100px;" class="kwick<%= ' last' if (index + 1) == quote.product.product_variants_count %>" data-name='<%= t("fabric.#{variant.fabric}") %>' data-min-qty="<%= variant.min_order_qty %>" data-variant-id="<%= variant.id %>"></li>
+      <% end %>
+    </ul>
+  </p>
+  <% if quote.product.printable && quote.product.embroiderable %>
+    <p>
+      <span><%= t("quick_price.select_ink_type") %></span>
+      <ul class="fabric_swatches">
+        <li>
+          <%= link_to image_tag('site/fabric.jpg'), "" %>
+        </li>
+      </ul>
+      <%= radio_button_tag 'ink_type', Product::INK_TYPES[:ink], quote.ink?, :id => "ink" %><label for="ink"><%= t('ink_type.printing') %></label>
+      <%= radio_button_tag 'ink_type', Product::INK_TYPES[:embroidery], quote.embroidery?, :id => "embroidery" %><label for="embroidery"><%= t('ink_type.embroidery') %></label>
+    </p>
+  <% else %>
+    <% if quote.product.printable %>
+      <%= hidden_field_tag "ink_type", Product::INK_TYPES[:ink] %>
+    <% else %>
+      <%= hidden_field_tag "ink_type", Product::INK_TYPES[:embroidery] %>
+    <% end %>
+  <% end %>
+
+  <% if quote.product.printable %>
+  <p id="ink-elm" class="<%= quote.ink? ? 'show' : 'hide' %>">
+    <%= t('quick_price.design_include_element') %>&nbsp;<%= text_field_tag 'num_of_colors', '', :maxlength => 2, :size => 2, :id => "num_of_colors", :class => "qty" %>&nbsp;<em><%= t('quick_price.color') %></em>.
+  </p>
+  <% end %>
+
+  <% if quote.product.embroiderable %>
+  <p id="embr-elm" class="<%= quote.embroidery? ? 'show' : 'hide' %>">
+    <%= hidden_field_tag "num_of_locations", "0", :id => "num_of_locations" %>
+    <p><%= t('quick_price.select_locations') %></p>
+    <table id="locations">
+      <tr>
+        <td>
+          <%= link_to image_tag('site/tshirt-front_leftchest.gif'), "javascript://", :class => "img_location" %>
+          <span style="display:block">
+            <%= check_box_tag 'leftchest', 1, false, :class => "location" %>
+            <%= label_tag "leftchest", t('product.leftchest') %>
+          </span>
+        </td>
+        <td>
+          <%= link_to image_tag('site/tshirt-front_rightchest.gif'), "javascript://", :class => "img_location" %>
+          <span style="display:block">
+            <%= check_box_tag 'rightchest', 1, false, :class => "location" %>
+            <%= label_tag "rightchest", t('product.rightchest') %>
+          </span>
+        </td>
+        <td>
+          <%= link_to image_tag('site/tshirt-left_sleeve.gif'), "javascript://", :class => "img_location" %>
+          <span style="display:block">
+            <%= check_box_tag 'leftsleeve', 1, false, :class => "location" %>
+            <%= label_tag "leftsleeve", t('product.leftsleeve') %>
+          </span>
+        </td>
+        <td>
+          <%= link_to image_tag('site/tshirt-right_sleeve.gif'), "javascript://", :class => "img_location" %>
+          <span style="display:block">
+            <%= check_box_tag 'rightsleeve', 1, false, :class => "location" %>
+            <%= label_tag "rightsleeve", t('product.rightsleeve') %>
+          </span>
+        </td>
+        <td>
+          <%= link_to image_tag('site/tshirt-back_nape.gif'), "javascript://", :class => "img_location" %>
+          <span style="display:block">
+            <%= check_box_tag 'backnape', 1, false, :class => "location" %>
+            <%= label_tag "backnape", t('product.backnape') %>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </p>
+  <% end %>
+  <p><%= t('quick_price.enter_quantity') %></p>
+  <table cellspacing="0" cellpadding="0" id="quantities">
+    <tr>
+      <td class="size_name">S:</td>
+      <td><%= text_field_tag 'quantities[S]', '', :maxlength => 6,:size => 5 %></td>
+      <td class="size_name">M:</td>
+      <td><%= text_field_tag 'quantities[M]', '', :maxlength => 6,:size => 5 %></td>
+      <td class="size_name">L:</td>
+      <td><%= text_field_tag 'quantities[L]', '', :maxlength => 6,:size => 5 %></td>
+    </tr>
+    <tr>
+      <td class="size_name">XL:</td>
+      <td><%= text_field_tag 'quantities[XL]', '', :maxlength => 6, :size => 5 %></td>
+      <td class="size_name">XXL:</td>
+      <td><%= text_field_tag 'quantities[XXL]', '', :maxlength => 6, :size => 5 %></td>
+      <td class="size_name">3XL:</td>
+      <td><%= text_field_tag 'quantities[3XL]', '', :maxlength => 6, :size => 5 %></td>
+    </tr>
+  </table>
+  <p class="notice" style="display: <%= show_notice?(quote.product.default_variant) ? 'block' : 'none' %>;"><span class="underline note"><%= t('quick_price.note1') %></span> <%= t('quick_price.note2', :min_qty => quote.product.default_variant.min_order_qty).html_safe %></p>
+  <div id="loading" class="hide"><%= image_tag('site/loading.gif') %></div>
+  <div id="quote-result"></div>
+  <p>
+    <%= submit_tag t('site.get_price'), :class => "button red medium bigrounded" %>
+    <input type="button" id="clear_form" class="button white medium bigrounded" value="clear">
+  </p>
+<% end %>
+</div>

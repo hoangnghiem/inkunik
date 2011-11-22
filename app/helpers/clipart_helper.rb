@@ -1,0 +1,2 @@
+module ClipartHelper
+end

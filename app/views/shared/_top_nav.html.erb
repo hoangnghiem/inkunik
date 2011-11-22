@@ -1,0 +1,11 @@
+<ul>
+  <% if user_signed_in? %>
+    <li>Hello, <%= current_user.username %></li>
+    <li><%= link_to "Dang xuat", destroy_user_session_path %></li>
+  <% else %>
+    <li><%= link_to t('site.login'), new_user_session_path %></li>
+  <% end %>
+  <li><%= link_to t('site.account'), user_root_path %></li>
+  <li><%= link_to t('site.cart'), "" %></li>
+  <li><%= link_to t('site.help'), "" %></li>
+</ul>

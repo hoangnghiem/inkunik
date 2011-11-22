@@ -1,0 +1,26 @@
+<div id="registration-box">
+  <h1 class="box-title"><%= t('site.create_account') %></h1>
+  <div class="box-content">
+    <% form_for(resource, :as => resource_name, :url => user_registration_path, :html => { :class => "form" }) do |f| %>
+      <%= devise_error_messages! %>
+      <p><%= f.label :username, t('site.username') %><%= required %><br />
+      <%= f.text_field :username %></p>
+
+      <p><%= f.label :email, t('site.email') %><%= required %><br />
+      <%= f.text_field :email %></p>
+
+      <p><%= f.label :password, t('site.password') %><%= required %><br />
+      <%= f.password_field :password %></p>
+
+      <p><%= f.label :password_confirmation, t('site.password_confirmation') %><%= required %><br />
+      <%= f.password_field :password_confirmation %></p>
+
+      <p><%= label_tag t('captcha.captcha') %><%= required %></p>
+      <%= recaptcha_tags :public_key => APP_CONFIG["recaptcha"]["public_key"], :display => captcha_options %>
+
+      <p><%= f.submit t('site.create_account'), :class => "button green medium bigrounded" %></p>
+    <% end %>
+
+    <%= render :partial => "account/shared/links" %>
+  </div>
+</div>

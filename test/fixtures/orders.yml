@@ -1,0 +1,55 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  billing_firstname: MyString
+  billing_lastname: MyString
+  billing_address: MyString
+  billing_country: MyString
+  billing_state: MyString
+  billing_zipcode: MyString
+  billing_phone: MyString
+  shipping_firstname: MyString
+  shipping_lastname: MyString
+  shipping_address: MyString
+  shipping_state: MyString
+  shipping_country: MyString
+  shipping_zipcode: MyString
+  shipping_phone: MyString
+  shipping_method_id: 1
+  order_sub_total: 1.5
+  shipping_fee: 1.5
+  tax_fee: 1.5
+  promotion_code: MyString
+  discount_amount: 1.5
+  order_total: 1.5
+  order_status: 1
+  requested_date: 2010-12-15 09:44:28
+  delivery_date: 2010-12-15 09:44:28
+
+two:
+  user_id: 1
+  billing_firstname: MyString
+  billing_lastname: MyString
+  billing_address: MyString
+  billing_country: MyString
+  billing_state: MyString
+  billing_zipcode: MyString
+  billing_phone: MyString
+  shipping_firstname: MyString
+  shipping_lastname: MyString
+  shipping_address: MyString
+  shipping_state: MyString
+  shipping_country: MyString
+  shipping_zipcode: MyString
+  shipping_phone: MyString
+  shipping_method_id: 1
+  order_sub_total: 1.5
+  shipping_fee: 1.5
+  tax_fee: 1.5
+  promotion_code: MyString
+  discount_amount: 1.5
+  order_total: 1.5
+  order_status: 1
+  requested_date: 2010-12-15 09:44:28
+  delivery_date: 2010-12-15 09:44:28

@@ -1,0 +1,36 @@
+development:
+  site:
+    vn_domain: "localhost"
+    en_domain: "en.localhost"
+  recaptcha:
+    public_key: "6LcjN78SAAAAACvKnXvDQfdj7BRfKmKmUlqjXfiL"
+    private_key: "6LcjN78SAAAAAKRDUvVa7KEvFjo51vfldqTyFf6J"
+dev:
+  site:
+    vn_domain: "dev.inkunik.com"
+    en_domain: "en.dev.inkunik.com"
+  recaptcha:
+    public_key: "6LcjN78SAAAAACvKnXvDQfdj7BRfKmKmUlqjXfiL"
+    private_key: "6LcjN78SAAAAAKRDUvVa7KEvFjo51vfldqTyFf6J"
+
+test:
+  site:
+    vn_domain: "localhost"
+    en_domain: "en.localhost"
+
+staging:
+  site:
+    vn_domain: "staging.inkunik.com"
+    en_domain: "en.staging.inkunik.com"
+  recaptcha:
+    public_key: "6LcjN78SAAAAACvKnXvDQfdj7BRfKmKmUlqjXfiL"
+    private_key: "6LcjN78SAAAAAKRDUvVa7KEvFjo51vfldqTyFf6J"
+
+production:
+  site:
+    vn_domain: "inkunik.com"
+    en_domain: "en.inkunik.com"
+  recaptcha:
+    public_key: "6LcjN78SAAAAACvKnXvDQfdj7BRfKmKmUlqjXfiL"
+    private_key: "6LcjN78SAAAAAKRDUvVa7KEvFjo51vfldqTyFf6J"
+

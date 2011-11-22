@@ -1,0 +1,6 @@
+<div class="padding10-top-bottom">
+  <%= form_for :upload_photo,  :remote => true, :url => { :controller=>"upload_photo", :action => "create" }, :html => { :method => :post, :id => 'uploadPhotoForm', :multipart => true } do |form| %>
+     <%= form.file_field :data %>
+     <!--<%= submit_tag "Upload" %> -->
+   <% end %>
+</div>

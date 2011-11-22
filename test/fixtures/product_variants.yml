@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sku: MyString
+  product_id: 1
+  fabric: MyString
+  min_order_qty: 1
+  price: 1.5
+  blank_shirt_price: 1.5
+  active: false
+  default: false
+
+two:
+  sku: MyString
+  product_id: 1
+  fabric: MyString
+  min_order_qty: 1
+  price: 1.5
+  blank_shirt_price: 1.5
+  active: false
+  default: false

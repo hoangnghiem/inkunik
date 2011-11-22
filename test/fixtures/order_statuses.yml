@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  order_status_name: Opening/Non-Purchased
+
+two:
+  order_status_name: Opening/Purchased
+
+three:
+  order_status_name: Processing
+
+four:
+  order_status_name: Cancelled
+
+five:
+  order_status_name: Deliveried/Closed

@@ -1,0 +1,315 @@
+<!--
+Copyright by Inkunik Co. LTD,
+Author: ThanhMai (tmai@inkunik.com)
+Date: 10-10-2010
+-->
+
+    <div class='float-left'><a href='#garmentStylePanel' title="Styles" id="garmentStyleChoose" class='button orange large bigrounded'>Style</a></div>
+    <div class='float-left'><a href='#colorPanel' title="Colors" id="garmentColorChoose" class='button orange large bigrounded'>Color</a></div>
+    <div class=clear-left><!-- --></div>
+
+    <div style="padding-bottom:5px;">
+        <!-- Garment Side (Position) Picker -->
+        <div id="positionPanel" class='action-panel'>
+            <!--<h3>Positions</h3>-->
+            <div id='front-pos' position="design-canvas-front" container='containment-front-tshirt' class="pos-buttons float-left"><img src="/images/assets/areas/printedshirt/apparel-front-vertical.gif" alt='Front of Body'/></div>
+            <div id='behind-pos' position="design-canvas-behind" container='containment-behind-tshirt' class="pos-buttons float-left"><img src="/images/assets/areas/printedshirt/apparel-back-vertical.gif" alt='Behind of Body'/></div>
+            <div id='left-pos' position="design-canvas-left" container='containment-left-tshirt' class="pos-buttons float-left"><img src="/images/assets/areas/printedshirt/shortsleeve_tshirt-left_sleeve.gif" alt='Left Sleeve'/></div>
+            <div id='right-pos' position="design-canvas-right" container='containment-right-tshirt' class="pos-buttons float-left"><img src="/images/assets/areas/printedshirt/shortsleeve_tshirt-right_sleeve.gif" alt='Right Sleeve'/></div>
+            <div class="clear-left"><!-- --></div>
+          <%= hidden_field_tag 'selected_position', 'containment-front-tshirt' %>
+        </div>
+    </div>
+    <div class='float-left'><a href='#textPanel' title="Text" id="addTextChoose" class='button orange large'>Add Text</a></div>
+    <div class='float-left'><a href='#art-gallery' title="Art Gallery" id="addClipArt" class='button orange large'>Add Clip Art</a></div>
+    <div class='float-left'><a href='#photo-upload-form' title="Personal Image" id="uploadImage" class='button orange large'>Add Your Image</a></div>
+    <div class=clear-left><!-- --></div>
+        <!-- Start: Adding Actions -->
+        <div class=hidden>
+            <!-- Text Adding -->
+            <div id="textPanel" class='action-panel'>
+                <%= form_tag("/api/textart", :id => 'textart_form') do %>
+                  <div>
+                  <%= label_tag "Enter text *:" %>
+                  <%= text_field_tag "t" %>
+                  </div>
+                <div class="hidden">
+                  <div class=dropdown-selection>
+                  <%= label_tag "Text Font:" %>
+                  <%= select_tag "f", options_for_select(TextArt::FONTS)%>
+                  </div>
+                  <div>
+                  <%= label_tag "Text Size:" %>
+                  <%= select_tag "fs", options_for_select(TextArt::FONT_SIZES) %>
+                  </div>
+                  <div class=dropdown-selection>
+                  <%= label_tag "Text Style:" %>
+                  <%= select_tag "s", options_for_select([""] + TextArt::STYLES) %>
+                  </div>
+                  <div class=dropdown-selection>
+                  <%= label_tag "Text Shape:" %>
+                  <%= select_tag "e", options_for_select([""] + TextArt::SHAPES) %>
+                  </div>
+                  <div>
+                  <%= label_tag "Rotate (0 - 360):" %>
+                  <input type="text" class=hidden name="r" id="ar">
+                  <div id="add-text-rotate-amount" style="border:0; color:#f6931f; font-weight:bold;" ></div>
+                  <div id="add-text-rotate-slider"></div>
+                  </div>
+                  <div>
+                  <%= label_tag "Text Color:", nil, {:class=>"picker_field_label", :id=>"color_label"} %>
+                  <%= text_field_tag "c", "",  :id=>"add_text_color" %>
+                  </div>
+                  <div>
+                  <%= label_tag "Outline Color:" %>
+                  <%= select_tag "oc", options_for_select([""] + TextArt::COLORS) %>
+                  </div>
+                  <div>
+                  <%= label_tag "Outline Weight:" %>
+                  <%= select_tag "l", options_for_select(["", 1,2,3,4,5]) %>
+                  </div>
+                  <div>
+                  <%= label_tag "Arc Angle (0 - 360):" %>
+                  <input type="text" name="a" id="aa">
+                  </div>
+                </div>
+
+                  <%= submit_tag "Insert" %>
+                <% end %>
+            </div>
+        </div>
+
+        <!-- Image Adding -->
+        <div id="imagePanel" class='action-panel hidden'>
+            <div id='custom-image-area'>
+                  <%= form_tag("/api/clipart", :id => 'clipart') do %>
+                  <%= hidden_field_tag 'src', '' %>
+                  <div class='major_color_field hidden'>
+                    <%= label_tag "Major Color:", nil, {:class=>"picker_field_label"} %>
+                    <%= text_field_tag "b", "",  :id=>"add_major_color" %><br/>
+                  </div>
+                  <%= label_tag "Scale (0.05 - 1.0) :" %>
+                  <input type="text" class=hidden name="rs" id="airs">
+                  <div id="add-image-resize-amount" style="border:0; color:#f6931f; font-weight:bold;" ></div>
+                  <div id="add-image-resize-slider"></div>
+                  <%= label_tag "Rotate (0 - 360):" %>
+                  <input type="text" class=hidden name="r" id="air">
+                  <div id="add-image-rotate-amount" style="border:0; color:#f6931f; font-weight:bold;" ></div>
+                  <div id="add-image-rotate-slider"></div>
+
+                  <%= submit_tag "Insert" %>
+                <% end %>
+            </div>
+        </div>
+      <!-- End: Adding Actions -->
+    <!-- Editing Actions -->
+    <div id="edit-actions-board" class="overlay">
+        <div id="editImagePanel" class='edit-panel hidden'>
+            <h3>Picture Settings</h3>
+            <div class="image-preview"><%= image_tag('arts/noimage.gif')  %></div>
+            <div id='edit-image-area'>
+                <%= form_tag("/api/clipart", :id => 'edit-clipart') do %>
+                  <%= hidden_field_tag 'selected_image', '' %>
+                  <%= hidden_field_tag 'src', '' %>
+                  <div class='major_color_field hidden'>
+                    <%= label_tag "Major Color:", nil, {:class=>"picker_field_label"} %>
+                    <%= text_field_tag "b", "",  :id=>"edit_major_color" %><br/>
+                  </div>
+                  <div>
+                    Embroidery <input type="checkbox" name="emb" id="iemb" value="true" />
+                  </div>
+                  <div>
+                    Vignette <input type="checkbox" name="vig" id="ivig" value="true" />
+                  </div>
+                  <div>
+                    <input type="radio" name="ff" value="none" />None &nbsp;
+                    <input type="radio" name="ff" value="flip" />Flip &nbsp;
+                    <input type="radio" name="ff" value="flop" />Flop &nbsp;
+                    <input type="radio" name="ff" value="transpose" />Transpose &nbsp;
+                    <input type="radio" name="ff" value="transverse" />Transverse
+                  </div>
+                  <%= label_tag "Quantum:" %>
+                  <input type="text" class=hidden name="qr" id="iqr">
+                  <div id="edit-image-quantum-amount" style="border:0; color:#f6931f; font-weight:bold;" ></div>
+                  <div id="edit-image-quantum-slider"></div>
+                  <%= label_tag "Scale (0.05 - 1.0):" %>
+                  <input type="text" class=hidden name="rs" id="irs">
+                  <span id="edit-image-resize-amount" style="border:0; color:#f6931f; font-weight:bold;"></span>
+                  <div id="edit-image-resize-slider"></div>
+                  <%= label_tag "Rotate (0 - 360):" %>
+                  <input type="text" class=hidden name="r" id="ir">
+                  <span id="edit-image-rotate-amount" style="border:0; color:#f6931f; font-weight:bold;"></span>
+                  <div id="edit-image-rotate-slider"></div>
+                <% end %>
+                <div><a id="remove_image" class='button orange large' href="javascript: $.removeImageArt();">Remove Image</a></div>
+            </div>
+        </div>
+
+        <div id="editTextPanel" class='edit-panel hidden'>
+            <h3>Text Settings</h3>
+            <%= form_tag("/api/textart", :id => 'edit_textart') do %>
+              <%= hidden_field_tag 'selected_textart', '' %>
+              <!--<%= label_tag "Text *:" %>-->
+              <%= text_field_tag "t" %><br/>
+              <div class=dropdown-selection>
+              <%= label_tag "Font:" %>
+              <%= select_tag "f", options_for_select(TextArt::FONTS), :id=>'if', :width => '20' %><br/>
+              </div>
+              <div>
+              <%= label_tag "Text Size:" %>
+              <%= select_tag "fs", options_for_select(TextArt::FONT_SIZES)  %><br/>
+              </div>
+              <div class=dropdown-selection>
+              <%= label_tag "Text Style:" %>
+              <%= select_tag "s", options_for_select([""] + TextArt::STYLES), :id=>'is', :width => '20' %><br/>
+              </div>
+              <div class=dropdown-selection>
+              <%= label_tag "Text Shape:" %>
+              <%= select_tag "e", options_for_select([""] + TextArt::SHAPES), :id=>'ie', :width => '20' %><br/>
+              </div>
+
+              <%= label_tag "Rotate:" %>
+              <input type="text" class=hidden name="r" id="r">
+              <span id="edit-text-rotate-amount" style="border:0; color:#f6931f; font-weight:bold;" ></span>
+              <div id="edit-text-rotate-slider"></div>
+
+              <%= label_tag "Text Color:", nil, {:class=>"picker_field_label"} %>
+              <%= text_field_tag "c", "",  :id=>"edit_text_color" %><br/>
+
+              <%= label_tag "Outline Color:" %>
+              <%= select_tag "oc", options_for_select([""] + TextArt::COLORS) %><br/>
+
+              <%= label_tag "Outline Weight:" %>
+              <%= select_tag "l", options_for_select(["", 1,2,3,4,5]) %><br/>
+
+              <%= label_tag "Arc Angle:" %>
+              <input type="text" class=hidden name="a" id="a">
+              <span id="edit-text-angle-amount" style="border:0; color:#f6931f; font-weight:bold;" ></span>
+              <div id="edit-text-angle-slider"></div>
+
+            <% end %>
+            <div><a id="remove_text" class='button orange large' href="javascript: $.removeTextArt();">Remove Text</a></div>
+        </div>
+    </div>
+    <!-- End: Editing Actions -->
+
+
+
+<!-- START: Actions Popups -->
+<!-- Clipart Selection Popup -->
+<div class=hidden >
+      <div id='art-gallery'>
+        <h3>Clipart</h3>
+        <div id='artSelector'></div>
+    </div>
+</div>
+<!-- Upload Iamge Popup -->
+<div class=hidden >
+      <div id='photo-upload-form'>
+        <h3>You can upload new picture by using below form</h3>
+        <%= render 'upload_photo_form' %>
+        <h3>Or select one of your uploaded pictures</h3>
+        <div id=user-uploaded-photos class=padding10-top-bottom><!-- filled by ajax --></div>
+
+    </div>
+</div>
+<!-- Garment Style Picker Popup -->
+<div class=hidden>
+    <div id="garmentStylePanel">
+        <h3>Style</h3>
+        <div id='garmentStyleTemplate'>
+          <div class="style-buttons"><a href="javascript:$.selectGarmentStyle('tshirts/short_sleeve','man','jpeg')">T-Shirt</a></div>
+          <div class="style-buttons"><a href="javascript:$.selectGarmentStyle('polos','man','jpeg')">Polo</a></div>
+          <%= hidden_field_tag 'selected_style', 'tshirts/short_sleeve/man' %>
+        </div>
+    </div>
+</div>
+
+<!-- Garment Color Picker -->
+<div style="display:none;">
+    <div id="colorPanel">
+        <h3>Colors</h3>
+        <div id='colorTemplate'></div>
+    </div>
+</div>
+
+<div id="side-view-area">
+    <div class="side-view"><a href='#' id=front-thumb><img width=97 height=100 src="/api/design2image?side=BODY&bkg=/images/garments/tshirts/short_sleeve/man/Red.jpeg&art[]=/images/arts/butterfly/butt_2.png&art_top[]=50&art_left[]=40&text[]=Inkunik 2011&text_top[]=142&text_left[]=35" class="img_croppable"/></a></div>
+    <div class="side-view"><a href='#' id=back-thumb><img width=97 height=100 src="/api/design2image?side=BODY&bkg=/images/garments/tshirts/short_sleeve/man/back/Red.jpeg&text[]=Thanh Mai 2011&text_top[]=42&text_left[]=35" class="img_croppable"/></a></div>
+    <!--<div class="side-view">Left Side</div>
+    <div class="side-view">Right Side</div>-->
+    <div class=clear-left><!-- --></div>
+</div>
+
+<div>
+    <script>
+    $(function() {
+
+        // positions for each overlay
+        var positions = [
+            [150, 	630],
+            [400, 20],
+            [400, 530],
+            [0, 	20]
+        ];
+
+        // setup triggers
+        $("button[rel]").each(function(i) {
+
+            $(this).overlay({
+
+                // common configuration for each overlay
+                oneInstance: false,
+                closeOnClick: false,
+
+                // setup custom finish position
+                top: positions[i][0],
+                left: positions[i][1],
+
+                // use apple effect
+                effect: 'apple'
+
+            });
+        });
+
+    });
+    </script>
+    <!-- overlay buttons -->
+    <div>
+        <button rel="div.overlay:eq(0)" id="edit-actions-board-btn" >first</button>
+        <button rel="div.overlay:eq(1)" type="button">second</button>
+    </div>
+
+  <!-- TESTING -->
+	<div class="overlay">
+		<h2 style="margin:10px 0">Overlay <me>#1</me></h2>
+		
+		<p style="float: left; margin:0px 20px 20px 0;">
+			<img src="/images/overlay/tools24.png" />
+		</p>
+		
+		<p>
+			 Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
+			 per inceptos himenaeos. Donec lorem ligula, elementum vitae, 
+			 imperdiet a, posuere nec, ante. Quisque mattis massa id metus.
+		</p>
+
+	</div>
+
+	<div class="overlay">
+		<h2 style="margin:10px 0">Overlay <me>#2</me></h2>
+		
+		<p style="float: left; margin:0px 20px 20px 0;">
+			<img src="/images/overlay/tools24.png" />
+		</p>
+		
+		<p>
+
+			 Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
+			 per inceptos himenaeos. Donec lorem ligula, elementum vitae, 
+			 imperdiet a, posuere nec, ante. Quisque mattis massa id metus.
+		</p>
+	</div>
+
+</div>
+<!-- END: Actions Popups -->

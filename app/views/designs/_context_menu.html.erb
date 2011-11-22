@@ -1,0 +1,20 @@
+
+<div class="vs-context-menu">
+	<ul>
+		<li class="cut seprator"><a href="javascript:cut();" id="menu_1">Cut</a></li>
+		<li class="copy"><a href="javascript:copy();" id="menu_2">Copy</a></li>
+		<li class="paste seprator"><a href="javascript:paste();" id="menu_3">Paste</a></li>
+		<li class="edit"><a href="javascript:edit();" id="menu_4">Edit</a></li>
+		<li class="delete"><a href="javascript:del();" id="menu_5">Delete</a></li>
+	</ul>
+</div>
+
+<%= javascript_include_tag 'context/vscontext.jquery' %>
+<%= javascript_include_tag 'context/menu_action' %>
+<%= stylesheet_link_tag '/javascripts/context/css/vscontext' %>
+  
+<script type="text/javascript" >
+	$(document).ready(function(){
+		$('#canvas-frame').vscontext({menuBlock: 'vs-context-menu'});
+	});
+</script>

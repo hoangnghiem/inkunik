@@ -1,0 +1,454 @@
+@import "compass";
+@import "compass/reset";
+@import "compass/layout";
+@import "blueprint";
+@import "blueprint/fancy-type";
+@import "partials/custom";
+@import "partials/button";
+@import "partials/kwick";
+@include sticky-footer(100px, "#main", "#main-footer", "#footer");
+//@include blueprint-typography;
+$body-background-color: #F6F8FA;
+$body-font-family: Arial, Helvetica, sans-serif;
+$footer-background-color: #e2f0ff;
+$link-color: #1D70C0;
+$box-radius: 7px;
+
+/* ----- COMMON STYLES ----- */ 
+body { background: $body-background-color;
+  font-family: $body-font-family;
+}
+.clear {
+  @include clearfix;
+}
+#main {
+  @include container;
+  background: #FFF;
+  @include border-top-right-radius(10px);
+  @include border-top-left-radius(10px);
+  @include box-shadow(#CCC);
+  margin-top: 10px;
+}
+.box {
+  @include title-box(200px);
+}
+.form {
+  @include blueprint-form;
+}
+.field_with_errors {
+  @include inline-block;
+  input[type='text'],input[type='password'] {
+    border: 1px solid red;
+  }
+}
+.required {
+  color: red;
+  font-weight: bold;
+}
+.hide {
+  display:none;
+}
+.show {
+  display: block;
+} 
+.bold {
+  font-weight: bold;
+}
+/* ----- HEADER STYLES ----- */
+#page-header {
+  @include column(24, true);
+}
+#header {
+  padding: 10px;
+  @include clearfix;
+}
+#header-r {
+  @include float-right;
+}
+#header-l {
+  @include float-left;
+}
+#header-r ul {
+  @include horizontal-list;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  @include float-right;
+}
+
+#header-r ul li a {
+  @include link-colors($link-color);
+  font-weight: bold;
+  line-height: 14px;
+  margin-left: 18px;
+  font-size: 11px;
+  text-decoration: none;
+  &:hover {text-decoration: underline;}
+}
+#top-contact {
+  clear: right;
+  margin-right: 200px;
+}
+#top-search, #top-contact {
+  @include float-left;
+}
+/* ----- NAV STYLES ----- */
+#nav {
+  @include column(24, true);
+  background: #227CD6;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+#nav ul {
+  @include horizontal-list; 
+}
+
+#nav ul li {
+  padding: 10px;
+}
+#nav ul li a {
+  @include link-colors(#FFF);
+  line-height: 14px;
+  margin-left: 18px;
+  font-size: 16px;
+  text-decoration: none;
+}
+#page-flash {
+  @include column(24, true);
+}
+/* ----- CONTENT STYLES ----- */
+#main-body {
+  @include column(24, true);
+  @include clearfix;
+}
+/* ----- FOOTER STYLES ----- */
+#footer {
+  background: $body-background-color;
+}
+#footer-content {
+  @include container;
+  background: #FFF;
+  @include border-bottom-right-radius(10px);
+  @include border-bottom-left-radius(10px);
+  @include box-shadow(#CCC);
+  margin-bottom: 20px;
+}
+
+/* ----- CATEGORY PAGES STYLES ----- */
+#category-browse {
+  @include title-box(170px, true);
+  @include float-left;
+  margin-left: 10px;
+}
+.thumb-wrap {
+  @include title-box(750px, true);
+  @include float-right;
+  margin-right: 10px;
+  .thumb {
+    text-align:center;
+    width: 243px;
+    border-right: 1px solid #F0F0F0;
+    margin-bottom: 25px;
+    @include float-left;
+    .thumb-name {
+      text-align: center;
+      width: 160px;
+      margin: 0 auto;
+      a {
+        color: $link-color;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 14px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .end {border-right: 1px solid #FFF;}
+}
+
+/* ----- PRODUCT PAGES STYLES ----- */
+#product-left {
+  @include column(7);
+  text-align: center;
+}
+#product-right {
+  @include column(17, true);
+  #details {
+    padding: 10px;
+    p {
+      font-size: 13px;
+      margin-top: 10px;
+      .cap {
+        text-transform: uppercase;
+      }
+    }
+    #product-name {
+      @include clearfix;
+      h1 {
+        @include float-left;
+      }
+      a {
+        @include float-right;
+      }
+    }
+  }
+}
+.fabric-swatches {
+  margin-top: 15px;
+  @include clearfix;
+  .fabric {
+    @include inline-block;
+    vertical-align: top;
+    width: 146px;
+    margin-right: 7px;
+    margin-bottom: 10px;
+    padding: 2px;
+    border: 1px solid #CCC;
+    @include border-radius(5px);
+    img {
+      border: 1px solid #CCC;
+      width: 144px;
+    }
+    label {
+      font-size: 12px;
+    }
+    .sel {
+      @include clearfix;
+      width: 140px;
+      vertical-align: top;
+      .lt { @include float-left; }
+      .rt { @include float-left; width: 115px; }
+    }
+  }
+}
+.color-swatches {
+  margin-top: 15px;
+  @include clearfix;
+  .color {
+    @include float-left;
+    margin-right: 9px;
+    margin-bottom: 10px;
+    img {
+      border: 1px solid #CCC;
+    }
+  }
+}
+/* ----- LOGIN PAGES STYLES ----- */
+#login-box {
+  @include prepend(1);
+  @include column(10);
+  @include append(1);
+  @include title-box("", false);
+  .box-content { padding: 20px; }
+  .btns {
+    margin-top: 40px;
+    @include clearfix;
+    #btn-login {@include float-right;}
+    #forgot-passw {@include float-left;}
+  }
+}
+#register-box {
+  @include column(11, true);
+  @include append(1);
+  @include title-box("", false);
+  .box-content { 
+    padding: 20px; 
+    font-size: 12px; 
+    line-height: 1.4em;
+  }
+  .btns {
+    margin-top: 40px;
+    @include clearfix;
+    #signup {@include float-right;}
+  }
+}
+#registration-box {
+  @include prepend(4);
+  @include column(16, true);
+  @include append(4);
+  @include title-box("", false);
+  .box-content { 
+    padding: 20px; 
+    font-size: 12px; 
+    line-height: 1.4em;
+  }
+}
+
+/* ----- MY ACCOUNT PAGES STYLES ----- */
+#control-panel-box {
+  @include title-box(170px, true);
+  @include float-left;
+  margin-left: 10px;
+}
+#content-panel-box {
+  @include title-box(750px, true);
+  @include float-right;
+  margin-right: 10px;
+}
+/*----- MODAL BOX -----*/
+/* container for external content. uses vertical scrollbar, if needed */
+div.contentWrap {
+  height:500px;
+  overflow-y:auto;
+}
+
+.modal {
+  background-color:#fff;
+  display:none;
+  /*width:350px;*/
+  padding:15px;
+  text-align:left;
+  border:2px solid #333;
+
+  opacity:0.8;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  -moz-box-shadow: 0 0 50px #ccc;
+  -webkit-box-shadow: 0 0 50px #ccc;
+}
+	
+.modal h2 {
+  background:url(/img/global/info.png) 0 50% no-repeat;
+  margin:0px;
+  padding:10px 0 10px 45px;
+  border-bottom:1px solid #333;
+  font-size:20px;
+}
+
+/* ----- NOTIFICATION STYLES ----- */
+.error, .alert {
+  @include error;
+  margin: 10px;
+}
+.success, .notice {
+  @include success;
+  margin: 10px;
+}
+
+/* ----- QUICK PRICE STYLES ----- */
+$quick-price-spacing: 7px;
+#quick-price-wrap {
+  font-size: 12px;
+  p { 
+    margin-bottom: $quick-price-spacing; 
+  }
+  #quick-fabric-swatches {
+    margin-bottom: $quick-price-spacing;
+  }
+  #locations {
+    margin-bottom: $quick-price-spacing;
+    td {
+      padding-right: 10px;
+    }
+  }
+  #quantities {
+    td {
+      padding: 2px;
+    }
+    td.size_name {
+      padding: 2px 5px;
+    }
+  }
+}
+
+/* ----- CART STYLES ----- */
+#cart-page {
+  padding-left: 20px;
+  padding-right: 20px;
+  h1 {
+    @include alt;
+    font-size: 30px;
+  }
+}
+#cart {
+  margin: 30px 0 10px 0;
+  width: 100%;
+  font-size: 12px;
+  th {
+    background: url(/images/grey-gradient.png) repeat-x;
+    padding: 9px;
+    font-weight: bold;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+  }
+  td {
+    border-bottom: 1px solid #EFEFEF;
+    padding: 15px;
+    vertical-align: top;
+  }
+  p {
+    margin: 8px 0;
+  }
+  .design {
+    border-right: 1px solid #EFEFEF;
+    padding: 15px;
+    width: 55%;
+    .ds-wrap {
+      @include clearfix;
+      .ds-img {
+        @include float-left;
+        text-align: center;
+        width: 40%;
+        img {
+          border: 1px solid #EFEFEF;
+        }
+      }
+      .ds-info {
+        @include float-right;
+        margin-left: 15px;
+        width: 55%;
+      }
+    }
+  }
+  .quantity {
+    width: 25%;
+    border-right: 1px solid #EFEFEF;
+    border-left: 1px solid #EFEFEF;
+    .tbl-qty {
+      width: 100%;
+      margin-bottom: 5px;
+      td {
+        border:none;
+        padding: 2px;
+      }
+      td.size-name {
+        text-align: right;
+      }
+    }
+  }
+  .total {
+    width: 20%;
+  }
+  .cart-total td {
+    background: #F6FCFF;
+    text-align: right;
+    font-weight: bold;
+  }
+}
+.cart-buttons {
+  margin-bottom: 40px;
+  @include clearfix;
+  .left {
+    @include float-left;
+  }
+  .right {
+    @include float-right;
+  }
+}
+
+/* ----- CHECKOUT STYLES ----- */
+.steps {
+  @include clearfix;
+  .step {
+    border: 1px solid #000;
+    @include inline-block;
+    padding: 5px;
+  }
+  .active {
+    background: yellow;
+  }
+}
+#checkout-page {
+  padding: 10px;
+}

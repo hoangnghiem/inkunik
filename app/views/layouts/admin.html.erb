@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inkunik</title>
+  <%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+  <%= stylesheet_link_tag 'print.css', :media => 'print' %>
+  <!--[if lte IE 6]>
+  <%= stylesheet_link_tag 'ie6.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <%= stylesheet_link_tag 'admin.css', :media => 'screen, projection' %>
+  <%= stylesheet_link_tag 'jquerycssmenu.css', :media => 'screen, projection' %>
+  <%= javascript_include_tag "jquery", "rails", "application", "jquerycssmenu" %>
+  <%= csrf_meta_tag %>
+  </script>
+</head>
+<body>
+  <div id="main">
+    <div id="header">
+      <h2>Inkunik Site Manager</h2>
+      <% if admin_signed_in? %>
+        <ul>
+            <li>Hello, <strong><%= current_admin.username %></strong></li>
+            <li>|</li>
+            <li><%= link_to "Front Site", root_path %></li>
+            <li>|</li>
+            <li><%= link_to('Logout', destroy_admin_session_path) %></li>
+        </ul>
+      <% end %>
+    </div>
+    <div id="nav" class="jquerycssmenu">
+      <%= render :partial => "shared/admin/nav" %>
+    </div>
+    <div id="flash">
+      <% flash.each do |key, msg| %>
+        <%= content_tag :div, msg, :class => key %>
+      <% end %>
+    </div>
+    <div id="main-body">
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+    <div id="main-footer"></div>
+  </div>
+  <div id="footer">
+    inkunik @2010
+  </div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'design' %>
+  <%= javascript_include_tag 'jquery.bgiframe-2.1.1' %>
+  <%= javascript_include_tag 'jquery.smallColorPicker'%>
+  <%= javascript_include_tag 'tmai-colorpicker.jquery' %>
+  <%= javascript_include_tag 'tmai-clipartpicker.jquery' %>
+  <%= javascript_include_tag 'jquery.dimensions' %>
+  <%= javascript_include_tag 'jquery.tooltip' %>
+  <%= javascript_include_tag 'jquery.accordion.pack'%>
+  <%= javascript_include_tag 'jquery.form'%>
+  <%= javascript_include_tag 'jquery-ui/jquery-ui' %>
+  <%= javascript_include_tag 'jquery-ui/jquery-ui-i18n.min' %>
+  <%= javascript_include_tag 'jquery-ui/jquery.ui.core' %>
+  <%= javascript_include_tag 'jquery-ui/jquery.ui.draggable' %>
+  <%= javascript_include_tag 'jquery-ui/jquery.ui.resizable' %>
+  <%= javascript_include_tag 'jquery-ui/jquery.ui.widget' %>
+  <!--<%= javascript_include_tag 'jquery-ui/jquery.ui.button' %>-->
+  <%= javascript_include_tag 'fancybox/jquery.mousewheel-3.0.2.pack' %>
+  <%= javascript_include_tag 'fancybox/jquery.fancybox-1.3.1.pack' %>
+  <%= javascript_include_tag 'jquery-spin/jquery-spin' %>
+  <%= javascript_include_tag 'jquery.tools.overlay.min' %>
+    <!--<%= javascript_include_tag 'tools.overlay' %>
+    <%= javascript_include_tag 'tools.overlay.apple' %>-->
+  <%= javascript_include_tag 'canvas.inkunik' %>
+  <%= javascript_include_tag 'msdropdown/js/ddback' %>
+
+  <%= stylesheet_link_tag 'fancybox/jquery.fancybox-1.3.1.css' %>
+  <%= stylesheet_link_tag 'jquery-ui/jquery.ui.all.css' %>
+  <%= stylesheet_link_tag 'jquery-ui/jquery-ui.css' %>
+  <%= stylesheet_link_tag 'smallColorPicker.css' %>
+  <%= stylesheet_link_tag 'msdropdown/dd.css' %>
+<% end %>
+
+<div id=designframe>
+    <div id=column_right>
+      <!--<div>-->
+            <!--<h3>Design Actions Panel</h3>-->
+      <!--</div>-->
+        <div id=action-board>
+            <%= render 'design_actions' %>
+        </div>
+
+       <div id=total-area>
+            <%= form_for(@design) do |f| %>
+              <input id="form_action" type="hidden" name="form_action" value=""/>
+              <input id="product_variant_field" type="hidden" name="design[product_variant_id]" value="1"/>
+              <input id="ink_type_field" type="hidden" name="design[ink_type]" value="ink"/>
+              <input id="canvas_data_field" type="hidden" name="design[canvas_data]" value=""/>
+              <input id="front_design_field" type="hidden" name="design[front_design]" value=""/>
+              <input id="back_design_field" type="hidden" name="design[back_design]" value=""/>
+              <input id="left_design_field" type="hidden" name="design[left_design]" value=""/>
+              <input id="right_design_field" type="hidden" name="design[right_design]" value=""/>
+              <input id="number_color_field" type="hidden" name="design[num_of_color]" value=""/>
+              <input id="number_photo_field" type="hidden" name="design[num_of_photo]" value=""/>
+              <input id="num_location_field" type="hidden" name="design[num_of_location]" value=""/>
+              <input id="garment_color_name" type="hidden" name="garment_color_name" value="White"/>
+              <input id="garment_image_bkg" type="hidden" name="garment_image_bkg" value="/images/garments/tshirts/short_sleeve/man/Red"/>
+                <div id=design-name class="padding5-bottom">Design Name: <input id="design_name_field" name="design[design_name]" value="No-name"/></div>
+                <div id=number-color class="padding5-bottom">Colors in texts and arts: <span>0</span></div>
+                <div id=number-photo class="padding5-bottom">Photos in design: <span>0</span></div>
+                <div id=quantity-size class="padding5-bottom">Quantity/Size:</div>
+                <div id=quantity-size-fields class="padding5-bottom">
+                  <span>S<input onKeyPress="return numbersOnly(event, false)" class='qtySize' type="text" name="qtyS" id="qtyS" maxlength=3 size=3></span>
+                  <span>M<input onKeyPress="return numbersOnly(event, false)" class='qtySize' type="text" name="qtyM" id="qtyM" maxlength=3 size=3></span>
+                  <span>L<input onKeyPress="return numbersOnly(event, false)" class='qtySize' type="text" name="qtyL" id="qtyL" maxlength=3 size=3></span>
+                  <span>XL<input onKeyPress="return numbersOnly(event, false)" class='qtySize' type="text" name="qtyXL" id="qtyXL" maxlength=3 size=3></span>
+                  <span>XXL<input onKeyPress="return numbersOnly(event, false)" class='qtySize' type="text" name="qtyXXL" id="qtyXXL" maxlength=3 size=3></span>
+                </div>
+
+                    <div id=total-quantity class="padding5-bottom">Total Quantity: <span id=sum-qty>0</span></div>
+                    <input id="design_total_quantity" type="hidden" name="design_total_quantity" value="0"/>
+                    <div id=total-price class="padding5-bottom">Total Price: <span id=sum-price class=total-price>Can't calculate</span> <%= current_site.currency_symbol%></div>
+                    <input id="design_total_price" type="hidden" name="design_total_price" value="0"/>
+             <% end %>
+        </div>
+        <div class='float-left'>
+            <a id="SaveDesign" href="javascript: saveDesign();" class='button blue large bold'>Save Design</a>
+        </div>
+        <div class='float-left'>
+            <a id="AddToCart" href="javascript: addToCart();" class='button blue large bold'>Add To Cart</a>
+        </div>
+        <div class=clear-left><!-- --></div>
+    </div>   
+
+    <div id="design-framework">
+            <div id="canvas-frame">
+                <div id="design-canvas-front" class="canvas-data hidden" style="background:url(/images/garments/tshirts/short_sleeve/man/Red.jpeg) no-repeat 0 0 transparent;">
+                  <!--<div id="bound-front-tshirt"></div>-->
+                  <!--<div id="bound-chest-tshirt"></div>-->
+                  <div id="containment-front-tshirt" class="containment-body"></div>
+                </div>
+                <div id="design-canvas-behind" class="canvas-data" style="background:url(/images/garments/tshirts/short_sleeve/man/back/Red.jpeg) no-repeat 0 0 transparent;">
+                    <!--<div id="bound-behind-tshirt"></div>-->
+                    <div id="containment-behind-tshirt" class="containment-body"></div>
+                </div>
+              <div id="design-canvas-left" class="canvas-data" style="background:url(/images/garments/tshirts/short_sleeve/man/left/White.jpeg) no-repeat 0 0 transparent;">
+                  <div id="containment-left-tshirt" class="containment-sleeve"></div>
+                </div>
+                <div id="design-canvas-right" class="canvas-data" style="background:url(/images/garments/tshirts/short_sleeve/man/right/White.jpeg) no-repeat 0 0 transparent;">
+                    <div id="containment-right-tshirt" class="containment-sleeve"></div>
+                </div>
+            </div>
+    </div>
+
+    <div class="clear-right"><!-- --></div>
+</div>
+
+<div class=clear-left><!-- --></div>
+
+<%= render 'total_calculate_form' %>
+
+<script type="text/javascript">   
+    function saveDesign() {
+        populateData();
+        $('form#new_design input[name=form_action]').val('SAVE');
+        $('form#new_design').submit();
+    }
+    function addToCart() {
+        populateData();
+        $('form#new_design input[name=form_action]').val('ADDTOCART');
+        $('form#new_design').submit();
+    }
+
+    function populateData(){
+        var canvas_data = $("#canvas-frame").html();
+        var front_data = $("#design-canvas-front").html();
+        var back_data = $("#design-canvas-behind").html();
+        var left_data = $("#design-canvas-left").html();
+        var right_data = $("#design-canvas-right").html();
+
+        $("#canvas_data_field").val(canvas_data);
+        $("#front_design_field").val(front_data);
+        $("#back_design_field").val(back_data);
+        $("#left_design_field").val(left_data);
+        $("#right_design_field").val(right_data);
+    }
+    function numbersOnly(e, decimal) {
+        var key;
+        var keychar;
+
+        if (window.event) {
+           key = window.event.keyCode;
+        }
+        else if (e) {
+           key = e.which;
+        }
+        else {
+           return true;
+        }
+        keychar = String.fromCharCode(key);
+
+        if ((key==null) || (key==0) || (key==8) ||  (key==9) || (key==13) || (key==27) ) {
+           return true;
+        }
+        else if ((("0123456789").indexOf(keychar) > -1)) {
+           return true;
+        }
+        else if (decimal && (keychar == ".")) {
+          return true;
+        }
+        else
+           return false;
+    }
+
+
+    $(function() {
+       /* $( "button" ).button({
+            icons: {
+                primary: "ui-icon-locked"
+            }
+        });*/
+
+        $("#canvas-frame .img-adding").draggable({ cursor: 'move' },{ containment: 'parent' });
+
+        $(".color").tooltip({
+            bodyHandler: function() {
+                return $(this).attr("colorname");
+            },
+            showURL: false
+        });
+
+    //----- Fancy Box
+        $("#garmentStyleChoose").fancybox({
+            'scrolling'		: 'no',
+            'titleShow'		: false,
+            'transitionIn'	: 'elastic',
+            'transitionOut'	: 'elastic',
+            'overlayShow'   : false,
+            'onClosed'		: function() {}
+        });
+
+        $("#garmentColorChoose").fancybox({
+            'scrolling'		: 'no',
+            'titleShow'		: false,
+            'transitionIn'	: 'elastic',
+            'transitionOut'	: 'elastic',
+            'easingIn'      : 'swing',
+            'easingOut'      : 'swing',
+            'overlayShow'   : false,
+            'onClosed'		: function() {}
+        });
+        $("#addClipArt").fancybox({
+            'scrolling'		: 'yes',
+            'height'        : '250',
+            'titleShow'		: false,
+            'transitionIn'	: 'elastic',
+            'transitionOut'	: 'elastic',
+            'overlayShow'   : true,
+            'onClosed'		: function() {}
+        });
+        $("#uploadImage").fancybox({
+            'scrolling'		: 'no',
+            'titleShow'		: false,
+            'transitionIn'	: 'elastic',
+            'transitionOut'	: 'elastic',
+            'overlayShow'   : true,
+            'onClosed'		: function() {},
+            'onStart'       : function() {
+                    $.ajax({
+                      url: '/upload_photo/my_photos',
+                      success: function(data) {
+                        $('div#user-uploaded-photos').html(data);
+                        /* select a uploaded photo */
+                        $('div#user-uploaded-photos a.addUploadedPicture img').click(function(){
+                            $('div.image-preview img').attr('src',$(this).attr('alt'));
+                            $('form#clipart div.major_color_field').removeClass("hidden");
+                            $('div.image-preview img').attr('img_src','uploaded');
+                            $('form#clipart input[name=src]').val($(this).attr('alt'));
+                            $('a#fancybox-close').click();
+                            $('#clipart').submit();
+                        });
+                      }
+                    });
+            }
+        });
+
+        $("#addTextChoose").fancybox({
+            'scrolling'		: 'no',
+            'titleShow'		: false,
+            'transitionIn'	: 'elastic',
+            'transitionOut'	: 'elastic',
+            'overlayShow'   : true,
+            'onClosed'		: function() {}
+        });
+
+        $('#navigation').accordion({
+			active: false,
+			header: '.head',
+			navigation: true,
+			event: 'click',
+			fillSpace: true,
+			animated: 'easeslide',
+            autoheight: true
+		});
+        $('.qtySize').spin({
+            imageBasePath: '/images/buttons/spin/',
+            min:0,
+            max: 1000
+        });
+
+        /* Add image to combobox */
+        $('#editTextPanel #if option').attr('title','/images/dropdown/icons/fonts/icon_lockopen.gif');
+        $('#editTextPanel #is option').attr('title','/images/dropdown/icons/text_styles/icon_music.gif');
+        $('#editTextPanel #ie option').attr('title','/images/dropdown/icons/text_shapes/icon_faq.gif');
+
+        try {
+            $('#editTextPanel #if, #editTextPanel #is, #editTextPanel #ie ').msDropDown({mainCSS:'dd'});
+		} catch(e) {
+			alert("Error: "+e.message);
+		}
+    });
+</script>
+
+<%= render 'context_menu' %>

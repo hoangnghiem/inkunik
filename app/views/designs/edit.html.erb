@@ -1,0 +1,175 @@
+
+<div id="design-framework">
+<% form_for(@design) do |f| %>
+  <%= f.error_messages %>
+  <input id="canvas_data_field" type="hidden" name="design[canvas_data]" value="<%= h @design.canvas_data %>"/>
+   <div id="canvas-frame">
+    <%= @design.canvas_data %>
+   </div>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @design %> |
+<%= link_to 'Back', designs_path %>
+
+<script type="text/javascript">
+	$(function() {
+		$("#canvas-frame .img-draggable").draggable({ cursor: 'move' });
+	});
+    $("#design_submit").click(function(){
+       var canvas_data = $("#canvas-frame").html();
+       $("#canvas_data_field").val(canvas_data);
+    });
+</script>
+</div>
+
+<!-- Actions -->
+<div id="design-actions-board">
+<div  style="height:450px;margin-bottom:1em;">
+			<ul id="navigation">
+                <li>
+					<a class="head" href="#">Positions</a>
+                      <ul>
+                        <div id="positionPanel">
+                            <div id='front-pos' position="design-canvas-front" container='containment-front-tshirt' class="pos-buttons">Front of Body</div>
+                            <div id='behind-pos' position="design-canvas-behind" container='containment-behind-tshirt' class="pos-buttons">Behind of Body</div>
+                            <div id='left-pos' position="design-canvas-left" container='containment-left-tshirt' class="pos-buttons">Left Sleeve</div>
+                            <div id='right-pos' position="design-canvas-right" container='containment-right-tshirt' class="pos-buttons">Right Sleeve</div>
+                            <%= hidden_field_tag 'selected_position', 'containment-front-tshirt' %>
+                        </div>
+                      </ul>
+				</li>
+				<li>
+					<a class="head" href="#">Text Art</a>
+                      <ul>
+                        <% form_tag("/api/textart", :id => 'form') do %>
+                          <%= label_tag "Enter text *:" %>
+                          <%= text_field_tag "t" %><br/>
+
+                          <%= label_tag "Select Font:" %>
+                          <%= select_tag "f", options_for_select(TextArt::FONTS) %><br/>
+
+                          <%= label_tag "Select Font Size:" %>
+                          <%= select_tag "fs", options_for_select(TextArt::FONT_SIZES) %><br/>
+
+                          <%= label_tag "Style:" %>
+                          <%= select_tag "s", options_for_select([""] + TextArt::STYLES) %><br/>
+
+                          <%= label_tag "Shape text:" %>
+                          <%= select_tag "e", options_for_select([""] + TextArt::SHAPES) %><br/>
+
+                          <%= label_tag "Rotate (-180 - 180):" %>
+                          <%= text_field_tag "r" %><br/>
+
+                          <%= label_tag "Text Color:" %>
+                          <%= select_tag "c", options_for_select([""] + TextArt::COLORS) %><br/>
+
+                          <%= label_tag "Outline Color:" %>
+                          <%= select_tag "oc", options_for_select([""] + TextArt::COLORS) %><br/>
+
+                          <%= label_tag "Outline Weight:" %>
+                          <%= select_tag "l", options_for_select(["", 1,2,3,4,5]) %><br/>
+
+                          <%= label_tag "Arc Angle (0 - 360):" %>
+                          <%= text_field_tag "a" %><br/>
+
+                          <%= submit_tag "Insert" %>
+                        <% end %>
+
+                      </ul>
+				</li>
+				<li>
+					<a class="head" href="#">Clip Art</a>
+					<ul>
+                      <h4>Sample Image</h4>
+                      <%= image_tag("arts/obama.png") %>
+                      <% form_tag("/api/clipart", :id => 'clipart') do %>
+                        <%= hidden_field_tag 'src', 'obama' %> <!-- WARNING: hardcode for testing -->
+                        <%= label_tag "Change color:" %>
+                        <%= select_tag "b", options_for_select([""] + TextArt::COLORS) %><br/>
+
+                        <%= label_tag "Resize :" %>
+                        <%= select_tag "rs", options_for_select([""] + [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5]) %><br/>
+                        <%= submit_tag "Insert" %>
+                      <% end %>
+					</ul>
+				</li>
+				<!--<li>
+					<a class="head" href="?p=1.1.3">Drums</a>
+					<ul>
+						<li><a href="?p=1.1.3.2">Acoustic Drums</a></li>
+						<li><a href="?p=1.1.3.3">Electronic Drums</a></li>
+
+						<li><a href="?p=1.1.3.4">Cymbals</a></li>
+						<li><a href="?p=1.1.3.5">Hardware</a></li>
+						<li><a href="?p=1.1.3.6">Accessories</a></li>
+					</ul>
+				</li>-->
+			</ul>
+		</div>
+
+
+<script>
+  $(function() {
+    $('#form').submit(function() {
+      $('#result').empty();
+      var url = "";
+      url += "t=" + $('input[name=t]').val() + "&f=" + $('select[name=f]').val() + "&fs=" + $('select[name=fs]').val();
+      if ($('select[name=s]').val() != "") {
+        url += "&s=" + $('select[name=s]').val();
+      }
+      if ($('select[name=e]').val() != "") {
+        url += "&e=" + $('select[name=e]').val();
+      }
+      if ($('input[name=r]').val() != "") {
+        url += "&r=" + $('input[name=r]').val();
+      }
+      if ($('select[name=c]').val() != "") {
+        url += "&c=" + $('select[name=c]').val();
+      }
+      if ($('select[name=oc]').val() != "") {
+        url += "&oc=" + $('select[name=oc]').val();
+      }
+      if ($('select[name=l]').val() != "") {
+        url += "&l=" + $('select[name=l]').val();
+      }
+      if ($('input[name=a]').val() != "") {
+        url += "&a=" + $('input[name=a]').val();
+      }
+      img_src = $('#form').attr('action') + "?" + encodeURI(url);
+      $("<img src='" + img_src + "' class='draggable img-draggable' style='position: relative;'>").appendTo('#design-canvas');
+      canvasReload();
+      return false;
+    });
+    $('#clipart').submit(function() {
+      var url = "";
+      url += "src=" + $('input[name=src]').val();
+      if ($('select[name=b]').val() != "") {
+        url += "&b=" + $('select[name=b]').val();
+      }
+      if ($('select[name=rs]').val() != "") {
+        url += "&rs=" + $('select[name=rs]').val();
+      }
+      img_src = $('#clipart').attr('action') + "?" + encodeURI(url);
+      $("<img src='" + img_src + "' class='draggable img-draggable ui-draggable' style='position: relative;'>").appendTo('#design-canvas');
+      canvasReload();
+      return false;
+    });
+        $('#navigation').accordion({
+			active: false,
+			header: '.head',
+			navigation: true,
+			event: 'click',
+			fillSpace: true,
+			animated: 'easeslide'
+		});
+
+  });
+
+  function canvasReload() {
+      $("#canvas-frame .img-draggable").draggable({ cursor: 'move' });
+  }
+</script>
+</div>

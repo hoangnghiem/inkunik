@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  shipping_method_name: Giao tan noi
+  unit: quantity
+  shipping_rate: 1000
+  active_flag: Y
+
+two:
+  shipping_method_name: Chuyen phat nhanh EMS
+  unit: weight
+  shipping_rate: 15000
+  active_flag: Y
+
+three:
+  shipping_method_name: Nhan tai cty Inkunik
+  unit: quantity
+  shipping_rate: 0
+  active_flag: Y
+
+four:
+  shipping_method_name: Lay hang nhanh (2-3 ngay lam viec)
+  unit: quantity
+  shipping_rate: 5000
+  active_flag: Y
+
+five:
+  shipping_method_name: Lay hang chuan (5-7 ngay lam viec)
+  unit: quantity
+  shipping_rate: 2000
+  active_flag: Y
+
+six:
+  shipping_method_name: Lay hang cham (1-2 tuan lam viec)
+  unit: quantity
+  shipping_rate: 0
+  active_flag: Y

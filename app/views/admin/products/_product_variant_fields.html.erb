@@ -1,0 +1,35 @@
+<div class="fields variant">
+  <div class="info">
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td><%= f.label :sku %></td>
+        <td><%= f.text_field :sku %></td>
+        <td><%= f.label :fabric %></td>
+        <td colspan="3"><%= f.select :fabric, Product::FABRICS.map {|f| [t("fabric.#{f}"), f]} %></td>
+        <td colspan="2"><%= f.label :active %><%= f.check_box :active %>
+        <%= f.label :default %><%= f.check_box :default %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :min_order_qty %></td>
+        <td><%= f.text_field :min_order_qty %></td>
+        <td><%= f.label :price %></td>
+        <td><%= f.text_field :price %></td>
+        <td><%= f.label :blank_shirt_price %></td>
+        <td><%= f.text_field :blank_shirt_price %></td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+    </table>
+    <div class="color-swatches">
+      <h6>Color Support</h6>
+      <% Product::COLOR_NAMES.each do |color| %>
+        <div class="color">
+          <%= image_tag("tshirts/colors/#{color}.jpg") %><br/>
+          <%= check_box_tag f.object_name + "[colors][]", color, f.object.color_list.include?(color) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="close">
+    <%= link_to_remove_fields "remove", f %>
+  </div>
+</div>

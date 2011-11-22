@@ -1,0 +1,14 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'design' %>  
+<% end %>
+<p>
+  <b>Your Design:</b>
+</p>
+<div id='design-show' class="canvas-show">
+  <%= @design.canvas_data.html_safe %> <!-- WARNING:  NOT PREVENT XSS ATTACK -->
+</div>
+
+
+
+<%= link_to 'Edit', edit_design_path(@design) %> |
+<%= link_to 'Back', designs_path %>

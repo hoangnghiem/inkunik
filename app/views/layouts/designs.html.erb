@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inkunik - <%= yield :title || "Welcome" %></title>
+  <%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+  <%= stylesheet_link_tag 'print.css', :media => 'print' %>
+  <!--[if lte IE 6]>
+  <%= stylesheet_link_tag 'ie6.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <%= stylesheet_link_tag 'site.css', :media => 'screen, projection' %>
+ <%= stylesheet_link_tag 'theme/boxes.css' %>
+ <%= stylesheet_link_tag 'theme/reset.css' %>
+  <%= javascript_include_tag "jquery", "rails", "application" %>
+  <%= csrf_meta_tag %>
+  <%= yield :head %>
+    <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-19880750-1']);
+          _gaq.push(['_setDomainName', '.inkunik.com']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+    </script>
+</head>
+<body>
+  <div id="main">
+    <div id="page-header">
+      <div id="header">
+        <div id="header-l">
+          <h2>Inkunik Site Manager</h2>
+        </div>
+        <div id="header-r">
+          <%= render :partial => "shared/top_nav" %>
+          <div id="top-contact">Hotline: 09012313113</div>
+          <div id="top-search">
+            <%= form_tag "" do %>
+              <%= text_field_tag "search" %>
+              <%= submit_tag "Search", :class => "button green small bigrounded" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <%= render :partial => "shared/nav" %>
+    </div>
+    <div id="page-flash">
+      <% flash.each do |key, msg| %>
+        <%= content_tag :div, msg, :class => key %>
+      <% end %>
+    </div>
+    <div id="main-body">
+      <%= yield %>
+    </div>
+    <div class="footer-container">
+            <div class="footer">
+                
+            <div class="footer-links">
+
+	            <div class="newsletter">
+		            <div class="box base-mini mini-newsletter">
+                <div class="head">
+                    <div class="h4">Newsletter<a name="newsletter-box"></a></div>
+                </div>
+                <form id="newsletter-validate-detail2" method="post" action="http://demos.themes-mgnto.com/newsletter/subscriber/new/">
+                <fieldset class="content">
+                        <legend>Newsletter</legend>
+                        <!--
+                                                -->
+                        <label for="newsletter2">Sign up for our newsletter:</label>
+                        <input type="text" class="required-entry validate-email input-text" id="newsletter2" name="email">
+                        <button class="form-button-alt" type="submit"><span>Subscribe</span></button>
+                </fieldset>
+            </form>
+            <script type="text/javascript">
+            //&lt;![CDATA[
+                var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail2');
+            //]]&gt;
+            </script>
+            </div>
+		            <p>Subscribe to our newsletter and be notified about our new products, special offers, news and events.</p>
+	            </div>
+	            <div class="informational user">
+		            <div class="head">
+			            <div class="h4">User Access</div>
+		            </div>
+		                    <ul>
+                                        <li class="first"><a rel="nofollow" title="My Account" href="http://demos.themes-mgnto.com/customer/account/">My Account</a></li>
+                                        <li><a class="top-link-wishlist" rel="nofollow" title="My Wishlist" href="http://demos.themes-mgnto.com/wishlist/">My Wishlist</a></li>
+                                        <li><a class="top-link-cart" rel="nofollow" title="My Cart" href="http://demos.themes-mgnto.com/checkout/cart/">My Cart</a></li>
+                                        <li><a class="top-link-checkout" rel="nofollow" title="Checkout" href="http://demos.themes-mgnto.com/checkout/">Checkout</a></li>
+                                        <li class="last"><a rel="nofollow" title="Log In" href="http://demos.themes-mgnto.com/customer/account/login/">Log In</a></li>
+                                </ul>
+             
+	            </div>
+	            <div class="informational">
+		            <div class="head">
+			            <div class="h4">Information</div>
+		            </div>
+		            <ul>
+            <li><a href="http://demos.themes-mgnto.com/about-magento-demo-store">About Us</a></li>
+            <li class="last"><a href="http://demos.themes-mgnto.com/customer-service">Customer Service</a></li>
+            </ul>		        <ul>
+                                        <li class="first"><a rel="nofollow" title="Site Map" href="http://demos.themes-mgnto.com/catalog/seo_sitemap/category/">Site Map</a></li>
+                                        <li><a rel="nofollow" title="Advanced Search" href="http://demos.themes-mgnto.com/catalogsearch/advanced/">Advanced Search</a></li>
+                                        <li class="last"><a rel="nofollow" title="Contact Us" href="http://demos.themes-mgnto.com/contacts/">Contact Us</a></li>
+                                </ul>
+	            </div>
+	            <div class="informational creditcards">
+		            <div class="head">
+			            <div class="h4">Payment Methods</div>
+		            </div>
+		            <div>
+			            <img alt="Accepted Payment Methods" src="http://demos.themes-mgnto.com/skin/frontend/elite/blue/images/creditcards.png">
+		            </div>
+	            </div>
+	            <div class="clearer"></div>
+
+            </div>
+
+            <div class="legality">
+	            <div class="footer_right">
+				            <div><a href="http://www.themes-mgnto.com/">Magento themes</a> from a cool <a title="Magento Design" href="http://www.themes-mgnto.com/custom-magento-design/">Magento Design</a> Company.</div>
+	            </div>
+	            <div class="footer_left">
+		            &copy; 2010 Magento Demo Store. All Rights Reserved.	</div>
+	            <div class="clearer"></div>
+            </div>
+                        </div>
+                    </div>
+  </div>
+  <div id="footer">
+    <div id="footer-content">
+      inkunik @2010
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  design_item_id: 1
+  garment_size_name: MyString
+  garment_color_name: MyString
+  quantity: 1
+
+two:
+  design_item_id: 1
+  garment_size_name: MyString
+  garment_color_name: MyString
+  quantity: 1

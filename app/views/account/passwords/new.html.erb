@@ -1,0 +1,15 @@
+<div id="registration-box">
+  <h1 class="box-title"><%= t('site.reset_password') %></h1>
+  <div class="box-content">
+    <% form_for(resource, :as => resource_name, :url => user_password_path, :html => { :method => :post, :class => "form" }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <p><%= f.label :email, t('site.email') %><%= required %><br />
+      <%= f.text_field :email %></p>
+
+    <p><%= f.submit t('site.send_password_instruction'), :class => "button green medium bigrounded" %></p>
+    <% end %>
+
+    <%= render :partial => "account/shared/links" %>
+  </div>
+</div>

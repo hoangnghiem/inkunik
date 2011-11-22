@@ -1,0 +1,22 @@
+<%= title(@category.name) %>
+
+<div id="category-browse">
+  <h1 class="box-title">Loai Ao</h1>
+  <div class="box-content">
+    <%= render :partial => "shared/category_browser" %>
+  </div>
+</div>
+<div class="thumb-wrap">
+  <h1 class="box-title"><%= @category.name %></h1>
+  <div class="box-content">
+    <% @products.each_with_index do |p, idx| %>
+      <% last = ((idx + 1) == @products.size) || ((idx + 1) % 3 == 0) %>
+      <div class="thumb<%= last ? ' end' : '' %>">
+        <%= link_to image_tag('tshirts/male/thumb/White.png'), product_path(p) %>
+        <div class="thumb-name">
+          <%= link_to p.name, "" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

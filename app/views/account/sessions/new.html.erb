@@ -1,0 +1,30 @@
+<div id="login-box">
+  <h1 class="box-title"><%= t('site.login') %></h1>
+  <div class="box-content">
+    <% form_for(resource, :as => resource_name, :url => user_session_path, :html => {:class => "form"}) do |f| %>
+      <p><%= f.label :username, t('site.username') %><%= required %><br />
+      <%= f.text_field :username %></p>
+
+      <p><%= f.label :password, t('site.password') %><%= required %><br />
+      <%= f.password_field :password %></p>
+
+      <% if devise_mapping.rememberable? -%>
+        <p><%= f.check_box :remember_me %> <%= f.label :remember_me, t('site.remember_me') %></p>
+      <% end -%>
+      <div class="btns">
+        <%= f.submit t('site.login'), :class => "button medium green bigrounded", :id => "btn-login" %>
+        <%= link_to t('site.forgot_password'), new_user_password_path, :id => "forgot-passw" %><br />
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="register-box">
+  <h1 class="box-title"><%= t('site.new_customer') %></h1>
+  <div class="box-content">
+    <p><%= t('site.register_benefit') %></p>
+    <div class="btns">
+      <%= link_to t('site.sign_up'), new_user_registration_path, :class => "button medium orange bigrounded", :id => "signup" %><br />
+    </div>
+  </div>
+</div>

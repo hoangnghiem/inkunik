@@ -1,0 +1,30 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'design' %>
+<% end %>
+
+<h1>Listing designs</h1>
+
+<table>
+  <tr>
+    <th>Design</th>
+  </tr>
+
+<% @designs.each do |design| %>
+  <tr>
+    <td><div id='design-index' class="canvas-show"><%=design.canvas_data.html_safe %></div></td>
+    <td><%= link_to 'Show', design %></td>
+    <td><%= link_to 'Edit', edit_design_path(design) %></td>
+    <td><%= link_to 'Destroy', design, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New design', new_design_path %>
+
+
+<script type="text/javascript">
+    $('div#design-index div.canvas-data').addClass('hidden');
+    $('div#design-index div#design-canvas-front').removeClass('hidden');
+</script>

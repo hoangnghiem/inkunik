@@ -1,0 +1,67 @@
+@import "compass/css3";
+.kwicks {
+	/* recommended styles for kwicks ul container */
+	list-style: none;
+	position: relative;
+	margin-top: 10px;
+	padding: 0;
+        @include clearfix;
+}
+.kwicks li{
+	/* these are required, but the values are up to you (must be pixel) */
+	//width: 120px;
+	//height: 200px;
+	/*do not change these */
+	display: block;
+	overflow: hidden;
+	padding: 0;  /* if you need padding, do so with an inner div (or implement your own box-model hack) */
+        cursor: pointer;
+        @include opacity(0.5);
+}
+
+.kwicks li.active {
+        @include opacity(1.0);
+}
+.kwicks.horizontal li {
+	/* This is optional and will be disregarded by the script.  However, it should be provided for non-JS enabled browsers. */
+	margin-right: 5px; /*Set to same as spacing option. */	
+	float: left;
+}
+.kwicks.vertical  li{
+	/* This is optional and will be disregarded by the script.  However, it should be provided for non-JS enabled browsers. */
+	margin-bottom: 5px; /*Set to same as spacing option. */	
+}
+
+#camap_6535_day { 
+  background: url('/images/fabrics/thumb/camap_6535_day.png');
+}
+#camap_6535_mong {
+  background: url('/images/fabrics/thumb/camap_6535_mong.png');
+}
+#camap_pe {
+  background: url('/images/fabrics/thumb/camap_pe.png');
+}
+#casau_6535_4chieu_dam { 
+  background: url('/images/fabrics/thumb/casau_6535_4chieu_dam.png');
+}
+#casau_6535_4chieu_nhat {
+  background: url('/images/fabrics/thumb/casau_6535_4chieu_nhat.png');
+}
+#casau_pe {
+  background: url('/images/fabrics/thumb/casau_pe.png');
+}
+#cotton_6535_day {
+  background: url('/images/fabrics/thumb/cotton_6535_day.png');
+}
+#cotton_6535_mong {
+  background: url('/images/fabrics/thumb/cotton_6535_mong.png');
+}
+#cotton_pe {
+  background: url('/images/fabrics/thumb/cotton_pe.png');
+}
+.kwicks.horizontal .last {
+	margin-right: none; /* cancel margin on last kiwck (if you set a margin above) */
+}
+.kwicks.vertical .last {
+	margin-bottom: none; /* cancel margin on last kiwck (if you set a margin above) */
+}

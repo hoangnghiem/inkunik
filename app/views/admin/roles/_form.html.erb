@@ -1,0 +1,46 @@
+<%= form_for([:admin, @role], :html => {:class => "form"}) do |f| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h3><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h3>
+
+      <ul>
+      <% @role.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><%= required %><br/>
+    <%= f.text_field :name %>
+  </p>
+  <h5 style="margin-bottom: 10px;">Permissions</h5>
+  <table class="grid">
+      <tr>
+        <th class="name">Permission</th>
+        <th class="act">Read</th>
+        <th class="act">Create</th>
+        <th class="act">Update</th>
+        <th class="act">Destroy</th>
+        <th class="act">All</th>
+      </tr>
+      <% role_perms = @role.permissions.select("id").map {|p| p.id} %>
+      <% Permission.all.group_by(&:name).each do |name, permissions| %>
+          <tr<%= dashboard?(name) ? " style='display:none;'" : '' %>> 
+            <td class="name"><%= name %></td>
+            <% permissions.each do |permission| %>
+              <td class="act"><%= check_box_tag "role[permission_ids][]", permission.id, checked_if_dashboard?(role_perms,permission), :id => "perm_#{permission.id}" %></td>
+            <% end %>
+            <% if permissions.size < 5 %>
+              <% (5 - permissions.size).times do %>
+                <td class="act">&nbsp;</td>
+              <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <div class="actions">
+    <%= submit_tag("Save", :class => 'button biground green') %>
+    <%= link_to 'Back', admin_roles_path, :class => 'button biground green' %>
+  </div>
+<% end %>

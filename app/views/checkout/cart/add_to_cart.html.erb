@@ -1,0 +1,68 @@
+
+<%
+   @design_item = DesignItem.find(params[:design_item_id])
+   @design_item_options = DesignItemOption.find_all_by_design_item_id(params[:design_item_id])
+   @product_variant = ProductVariant.find(@design_item.product_variant_id) unless @design_item.product_variant_id.blank?
+%>
+
+<div id="cart-page">
+  <h1><%= t('cart.name') %></h1>
+  <table id="cart">
+    <tr>
+      <th><%= t('cart.design') %></th>
+      <th><%= t('cart.quantity') %></th>
+      <th><%= t('cart.total') %></th>
+    </tr>
+    <tr>
+      <td class="design">
+        <div class="ds-wrap">
+          <div class="ds-info">
+            <p class="bold"><%=Design.find(@design_item.design_id).design_name%></p>
+            <p>Loai vai: [loai vai->get from product_variant] <%= link_to t('cart.view_large_image'), "" %></p>
+            <p>Loai ao: [loai ao->get from product]</p>
+            <p>3 mau</p>
+            <%= link_to "Chinh sua", "", :class => "button green small bigrounded" %>
+            <%= link_to "Xoa", "", :class => "button red small bigrounded" %>
+          </div>
+          <div class="ds-img">
+            <%= image_tag('tshirts/male/thumb/White.png') %><br/>
+            <%= link_to t('cart.view_large_image'), "#" %>
+          </div>
+
+        </div>
+      </td>
+      <td class="quantity">
+        <table class="tbl-qty">
+          <tr>
+            <% @design_item_options.each do |design_item_option| %>
+                <td class="size-name"><%= design_item_option.garment_size_name %>(<%= design_item_option.garment_color_name %>)</td>
+                <td><%= design_item_option.quantity %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td class="size-name">XL:</td>
+            <td>10</td>
+            <td class="size-name">XXL:</td>
+            <td>10</td>
+            <td class="size-name">3XL:</td>
+            <td>10</td>
+          </tr>
+        </table>
+        <%= link_to "Cap nhat", "", :class => "button green small bigrounded" %>
+      </td>
+      <td class="total">
+        <%= format_money(@design_item.total_price, current_site) %>
+      </td>
+    </tr>
+    <tr class="cart-total">
+      <td colspan="3">
+        Tong tien: <%= format_money(@design_item.total_price, current_site) %>
+      </td>
+    </tr>
+  </table>
+  <div class="cart-buttons">
+    <%= link_to "Tiep tuc mua hang", "", :class => "left button green medium" %>
+    <%= link_to "Thuc hien thanh toan", "", :class => "right button orange medium" %>
+  </div>
+</div>
+

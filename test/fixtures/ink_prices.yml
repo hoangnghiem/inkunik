@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  site_id: 1
+  min_qty: 1
+  max_qty: 1
+  color1: 1.5
+
+two:
+  site_id: 1
+  min_qty: 1
+  max_qty: 1
+  color1: 1.5

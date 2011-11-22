@@ -1,0 +1,17 @@
+<% 
+  men_cat = current_site.site_code == "VN" ? 'ao-thun-nam' : 'tbd'
+  men_collection = Category.find_by_path(men_cat)
+  women_cat = current_site.site_code == "VN" ? 'ao-thun-nu' : 'tbd'
+  women_collection = Category.find_by_path(women_cat)
+%>
+<ul>
+  <li><%= link_to t('site.home'), "" %></li>
+  <li><%= link_to t('site.studio'), studio_path %></li>
+  <li<%= @active_menu && @active_menu == men_collection.slug ? " class='active'" : '' %>>
+    <%= link_to t('site.men_collection'), list_products_path(men_collection) %>
+  </li>
+  <li<%= @active_menu && @active_menu == women_collection.slug ? " class='active'" : '' %>>
+    <%= link_to t('site.women_collection'), list_products_path(women_collection) %>
+  </li>
+  <li><%= link_to t('site.design_idea'), "" %></li>
+</ul>

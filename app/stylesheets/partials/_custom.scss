@@ -1,0 +1,45 @@
+@mixin title-box($width, $stretch: false, $header_background: #EFEFEF) {
+  @if $stretch {
+    width: $width;
+  }
+  font-size: 12px;
+  & .box-title { 
+    color: #444;
+    text-transform: uppercase;
+    @include text-shadow(#FFF);
+    font-weight: bold;
+    background: url(/images/grey-gradient.png) repeat-x;
+    padding: 9px 8px;
+    @include border-top-right-radius($box-radius);
+    @include border-top-left-radius($box-radius);
+    border: 1px solid #CCC;
+  }
+  & .box-content {
+    padding: 9px 8px;
+    background: #FFF;
+    @include border-bottom-right-radius($box-radius);
+    @include border-bottom-left-radius($box-radius);
+    @include clearfix;
+    border: { 
+      right: 1px solid #CCC;
+      left: 1px solid #CCC;
+      bottom: 1px solid #CCC;
+    }
+    & ul li a {
+      @include link-colors(#444);
+      text-decoration: none;
+      display:block;
+      padding: 3px;
+      margin-bottom: 5px;
+      &:hover {
+        text-decoration: underline;
+        background: #EAEEF5;
+        color: #1D70C0;
+      }
+    }
+    & ul li ul li a {
+      color: #1D70C0;
+      padding-left: 20px;
+    }
+  }
+}

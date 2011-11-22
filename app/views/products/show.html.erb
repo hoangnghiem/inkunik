@@ -1,0 +1,73 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "jquery.livequery", 'jquery.tools.min', "jquery.kwicks-1.5.1", "site/product" %>
+  <script type="text/javascript">
+  //<![CDATA[
+    $(function() {
+      product.num_of_variants = <%= @product.product_variants_count %>
+      product.default_variant_index = <%= @product.default_variant.position - 1 %>
+      product.init();
+    });
+  //]]>
+  </script>
+<% end %>
+
+<div id="product-left">
+  <%= image_tag("tshirts/male/medium/#{@product.default_variant.color_list.first.gsub(' ','')}.png", :id => "product-image") %>
+</div>
+<div id="product-right">
+  <div id="details">
+    <div id="product-name">
+      <h1><%= @product.name %></h1>
+      <a href="<%= quick_price_path(@product.id) %>" rel="#overlay" class="quick_price">
+        <button type="button" class="button white medium quick_price">Bao gia nhanh</button>
+      </a>
+    </div>
+    <p>
+      <%= @product.description %>
+    </p>
+    <p>
+      <%= t('product.sku') %>: <%= @product.default_variant.sku %>
+    </p>
+    <p>
+      <%= t('product.ink_type') %>:
+      <% if @product.printable and @product.embroiderable %>
+        <span class="cap"><%= t('product.print') %></span> - <span class="cap"><%= t('product.embroidery') %></span>
+      <% else %>
+        <% if @product.printable %>
+          <span class="cap"><%= t('product.print') %></span> 
+        <% else %>
+          <span class="cap"><%= t('product.embroidery') %></span> 
+        <% end %>
+      <% end %>
+    </p>
+    <p><%= t('product.fabric') %>: <%= link_to t('site.fabric_help'), "" %></p>
+    <ul id="fabric-swatches" class="kwicks horizontal">
+      <% @product.product_variants.each_with_index do |variant, index| %>
+        <li id="<%= variant.fabric %>" style="width:72px; height: 150px;" class="kwick<%= ' last' if (index + 1) == @product.product_variants.size %>"></li>
+      <% end %>
+    </ul>
+    <% @product.product_variants.each do |variant| %>
+      <div id="<%= variant.fabric %>-details" class="pv-details" style="display: <%= variant.default? ? 'block' : 'none' %>;">
+      <p>
+        <%= t('product.blank_shirt_price') %>: <%= t('product.blank_price', :price => format_comma_number(variant.blank_shirt_price)).html_safe %> (<%= t('product.price_change') %>)
+      </p>
+      <p>
+        <%= t('product.min_order_qty') %>: <%= t('product.min', :min_qty => variant.min_order_qty).html_safe %> (<%= t('product.price_change') %>)
+      </p>
+      <p><%= t('product.color') %>:(<%= t('product.price_change') %>)</p>
+      <div class="color-swatches">
+      <% variant.color_list.each do |color| %>
+        <div class="color">
+          <%= link_to image_tag("tshirts/colors/#{color}.jpg"), "javascript://", :title => color.gsub(" ",'') %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <% end %>
+    <%= link_to "Bat dau thiet ke", "", :class => "button bigrounded red" %>
+  </div>
+</div>
+<div class="modal" id="overlay" style="width: 500px;">
+  <!-- the external content is loaded inside this tag -->
+  <div class="contentWrap"></div>
+</div>

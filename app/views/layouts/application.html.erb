@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inkunik - <%= yield :title || "Welcome" %></title>
+  <%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+  <%= stylesheet_link_tag 'print.css', :media => 'print' %>
+  <!--[if lte IE 6]>
+  <%= stylesheet_link_tag 'ie6.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %>
+  <![endif]-->
+  <%= stylesheet_link_tag 'site.css', :media => 'screen, projection' %>
+  <%= javascript_include_tag "jquery", "rails", "application" %>
+  <%= csrf_meta_tag %>
+  <%= yield :head %>
+    <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-19880750-1']);
+          _gaq.push(['_setDomainName', '.inkunik.com']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+    </script>
+</head>
+<body>
+  <div id="main">
+    <div id="page-header">
+      <div id="header">
+        <div id="header-l">
+          <h2>Inkunik Site Manager</h2>
+        </div>
+        <div id="header-r">
+          <%= render :partial => "shared/top_nav" %>
+          <div id="top-contact">Hotline: 09012313113</div>
+          <div id="top-search">
+            <%= form_tag "" do %>
+              <%= text_field_tag "search" %>
+              <%= submit_tag "Search", :class => "button green small bigrounded" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <%= render :partial => "shared/nav" %>
+    </div>
+    <div id="page-flash">
+      <% flash.each do |key, msg| %>
+        <%= content_tag :div, msg, :class => key %>
+      <% end %>
+    </div>
+    <div id="main-body">
+      <%= yield %>
+    </div>
+    <div id="main-footer"></div>
+  </div>
+  <div id="footer">
+    <div id="footer-content">
+      inkunik @2010
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  domain: MyString
+  site_code: MyString
+  locale: MyString
+  currency_code: MyString
+  currency_symbol: MyString
+  default: false
+
+two:
+  domain: MyString
+  site_code: MyString
+  locale: MyString
+  currency_code: MyString
+  currency_symbol: MyString
+  default: false

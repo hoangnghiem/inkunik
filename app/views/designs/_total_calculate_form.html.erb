@@ -1,0 +1,10 @@
+<% form_for :total_calculate,  :remote => true, :url => { :controller=>"designs", :action => "total_calculate" }, :html => { :method => :post, :id => 'frm_total_cal' } do |form| %>
+  <div id="errors"></div>
+  <input id="cal_product_id" type="hidden" name="product_id" value="1"/>
+  <input id="cal_variant_id" type="hidden" name="variant_id" value="1"/>
+  <input id="cal_quantities" type="hidden" name="quantities[s]" value="0"/>
+  <input id="cal_num_of_colors" type="hidden" name="num_of_colors" value="0"/>
+  <input id="cal_num_of_photos" type="hidden" name="num_of_photos" value="0"/>
+  <input id="cal_ink_type" type="hidden" name="ink_type" value="ink"/>
+  <!--<div id="loading"><%= image_tag('site/loading.gif') %></div>-->
+<% end %>

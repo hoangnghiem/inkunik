@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product_id: 1
+  design_id: 1
+  front_design: MyText
+  back_design: MyText
+  left_design: MyText
+  right_design: MyText
+  num_of_color: 1
+  total_quantity: 1
+  total_price: 
+
+two:
+  product_id: 1
+  design_id: 1
+  front_design: MyText
+  back_design: MyText
+  left_design: MyText
+  right_design: MyText
+  num_of_color: 1
+  total_quantity: 1
+  total_price: 

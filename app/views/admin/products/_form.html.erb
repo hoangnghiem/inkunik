@@ -1,0 +1,49 @@
+<%= form_for([:admin, @product], :html => {:class => "form"}) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><%= required %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :slug %><%= required %><br />
+    <%= f.text_field :slug %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :printable %>
+    <%= f.check_box :printable %>
+  </div>
+  <div class="field">
+    <%= f.label :embroiderable %>
+    <%= f.check_box :embroiderable %>
+  </div>
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+  <h3>Variants</h3>
+  <div id="variants">
+    <% f.fields_for :product_variants do |builder| %>
+      <%= render 'product_variant_fields', :f => builder %>
+    <% end %>
+    <%= link_to_add_fields "Add Variant", f, :product_variants %>
+  </div>
+  <div class="actions">
+    <%= submit_tag("Save", :class => 'button biground green') %>
+    <%= link_to 'Back', admin_products_path, :class => 'button biground green' %>
+  </div>
+<% end %>

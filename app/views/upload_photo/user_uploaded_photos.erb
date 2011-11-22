@@ -1,0 +1,10 @@
+<%= "<div class=err-warning>You haven't uploaded any picture.</div>".html_safe if @uploaded_photos.count==0 %>
+<% @uploaded_photos.each do |photo| %>
+    <div class=photo-thumb-view>
+        <a href="#select_picture" class="addUploadedPicture">
+          <%= image_tag photo.data.url(:thumb), :alt => photo.data.url(:medium) %>
+        </a>
+    </div>
+<% end %>
+
+<div class=clear-left><!-- --></div>

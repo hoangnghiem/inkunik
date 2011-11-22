@@ -1,0 +1,78 @@
+$border-color: #778;
+.jquerycssmenu {
+  font: bold 12px Verdana;
+  border-bottom: 1px solid $border-color;
+  padding-left: 15px;
+  /*offset of tabs relative to browser left edge*/
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li {
+      position: relative;
+      display: inline;
+      float: left;
+      a {
+        display: block;
+        background: white url(/images/tintblue.gif) top center repeat-x;
+        /*background of tabs (default state)*/
+        padding: 5px 7px 4px 7px;
+        margin-right: 3px;
+        /*spacing between tabs*/
+        border: 1px solid $border-color;
+        border-bottom-width: 0;
+        color: #2d2b2b;
+        text-decoration: none;
+        &:hover {
+          background-image: url(/images/tintbluedark.gif); } }
+      ul {
+        position: absolute;
+        left: 0;
+        display: block;
+        visibility: hidden;
+        border-top: 1px solid black;
+        li {
+          display: list-item;
+          float: none;
+          width: 160px;
+          /*width of sub menus*/
+          ul {
+            top: 0; }
+          a {
+            font: normal 13px Verdana;
+            width: 160px;
+            /*width of sub menus*/
+            background: white;
+            color: black;
+            padding: 4px 5px;
+            margin: 0;
+            border-top-width: 0;
+            border-bottom: 1px solid black;
+            &:hover {
+              /*sub menus hover style*/
+              background: #eff9ff;
+              color: black; } } } } } } }
+
+/*Top level list items*/
+
+/*Top level menu link items style*/
+
+/*1st sub level menu*/
+
+/*Sub level menu list items (undo style from Top level List Items)*/
+
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+
+/* Sub level menu links style */
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+.downarrowclass {
+  position: absolute;
+  top: 7px;
+  right: 5px; }
+
+.rightarrowclass {
+  position: absolute;
+  top: 5px;
+  right: 5px; }

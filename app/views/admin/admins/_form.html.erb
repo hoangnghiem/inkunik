@@ -1,0 +1,36 @@
+<%= form_for([:admin, @admin], :html => {:class => "form"}) do |f| %>
+  <% if @admin.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h3><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h3>
+      <ul>
+      <% @admin.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :username %><%= required %><br/>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password %><%= required %><br/>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><%= required %><br/>
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :email %><%= required %><br/>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :role_id %><br/>
+    <%= f.select :role_id, Role.all.map {|role| [role.name.humanize, role.id]} %>
+  </p>
+  <div class="actions">
+    <%= submit_tag("Save", :class => 'button biground green') %>
+    <%= link_to 'Back', admin_admins_path, :class => 'button biground green' %>
+  </div>
+<% end %>

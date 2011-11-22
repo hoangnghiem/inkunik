@@ -1,0 +1,30 @@
+<%= render :partial => "account/shared/control_panel" %>
+<div id="content-panel-box">
+  <h1 class="box-title"><%= t('my_account.info') %></h1>
+  <div class="box-content">
+    <% form_for @user, :html => { :class => 'form' } do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation" class="error">
+          <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <p>
+        <%= f.label :username %><br/>
+        <%= f.text_field :username, :disabled => true %>
+      </p>
+      <p>
+        <%= f.label :full_name %><br/>
+        <%= f.text_field :full_name %>
+      </p>
+      <p>
+        <%= f.label :email %><%= required %><br/>
+        <%= f.text_field :email %>
+      </p>
+    <% end %>
+  </div>
+</div>
